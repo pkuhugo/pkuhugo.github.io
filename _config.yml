@@ -85,7 +85,7 @@ analytics:
 # Site Author
 author:
   name             : "Hugo (Guo) Yu"
-  avatar           : "/images/bio-pic-2.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/images/IMG_20190420_150557-2.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Data Science Portfolio"
   location         : "Houston, TX"
   email            :
@@ -112,7 +112,7 @@ author:
   twitter          :
   vine             :
   weibo            :
-  xing             : 
+  xing             :
   youtube          : # "https://youtube.com/c/MichaelRoseDesign"
 
 
