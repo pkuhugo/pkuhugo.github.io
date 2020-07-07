@@ -41,7 +41,6 @@ After feature field matching, there are 93 features left. But not all of the fea
 3. Remove the highly correlated features
 
 After the feature selection, I inspected the features one by one. Here are some examples of the statistical examination of the key features.
-*Interest Rate*
 <img src="{{ site.url }}{{ site.baseurl }}/images/01_lendingclub/interest_rate.jpg" alt="Interest Rate">
 ## H2 Heading
 
