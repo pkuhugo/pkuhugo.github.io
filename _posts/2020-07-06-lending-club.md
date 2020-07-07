@@ -47,6 +47,18 @@ After the feature selection, I inspected the features one by one in order to get
 *Interest Rate* <br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/interest_rate.JPG)
 
+*FICO Score*<br>
+![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/fico.JPG)
+
+*Grade*<br>
+![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/grade.JPG)
+
+*Home ownership*<br>
+![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/home.JPG)
+
+*Income verification*<br>
+![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/verify.JPG)
+
 In total, 23 features were dropped due to more than 50% data missing. I also dropped *accnowdelinq*, *delinqamnt*, *chargeoffwithin12mths* from the feature fields because of the large P values in the hypothesis test. *numsats*, *tothicredlim*, *installment*, *fundedamnt*, *ficorangehigh*, *numrevtlbalgt0* are also dropped because they are highly correlated to some other features. *zipcode* is dropped now because it has too many category values. It may be added to the feature field if it can be related to other information, such as the average income. *emptitle* is also dropped, because it is a text feature which might need Natural Language Processing for it to add value to the prediction.
 
 # Feature Engineering
