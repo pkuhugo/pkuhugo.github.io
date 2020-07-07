@@ -3,7 +3,7 @@ title: "Predict Default Loans with Lending Club Data"
 date: 2020-07-07
 tags: [data wrangling,  machine learning]
 header:
-  image: "/images/01_lendingclub/loan_by_year.JPG"
+  image: "/images/01_lendingclub/loan_by_year2.PNG"
 excerpt: "Data Wrangling, Machine Learning"
 mathjax: "true"
 ---
@@ -63,10 +63,36 @@ In total, 23 features were dropped due to more than 50% data missing. I also dro
 
 # Feature Engineering
 The categorical feature needs to be converted to the numerical feature in order to use them in the model training. If the categorical values have rank information (e.g., *grade* and *subgrade*), they can be converted through label encoding. If there's no ordering amongst the values of the categorical feature (e.g., *purpose* and *homeownership*), the on-hot-encoding is utilized in the numerical conversion.
-
+Label encoding:
+```python
+#grade and subgrade use label encoding because the rank matters
+grade_dic = {"A":1,
+            "B":2,
+            "C":3,
+            "D":4,
+            "E":5,
+            "F":6,
+            "G":7}
+hst_drop_df.grade = hst_drop_df.grade.map(grade_dic)
+hst_drop_df.subgrade = hst_drop_df.subgrade.apply(lambda x:(grade_dic[x[0]]-1)*5+int(x[1]))
+```
+One-hot encoding:
+```python
+#For the categorical data without ordering
+dummy_list = ['addrstate', 'applicationtype', 'emplength',  'homeownership', 'initialliststatus', 'purpose',  'term', 'verificationstatus']
+for f in dummy_list:
+    dummy_df = pd.get_dummies(hst_drop_df[f], prefix = f)
+    hst_drop_df = hst_drop_df.drop([f], axis=1)
+    hst_drop_df = pd.concat((hst_drop_df, dummy_df), axis = 1)
+```
 # Model Training and Evaluation
 The early 80% percent of the historical data were used for the model training, and the later 20% data were used for model evaluation.
-
+Train/Test split:
+```python
+#I'll split the train/test sample at 8:2
+df_train = hst_drop_df.loc[hst_drop_df['issued']<hst_drop_df['issued'].quantile(0.8)]
+df_test = hst_drop_df.loc[hst_drop_df['issued']>hst_drop_df['issued'].quantile(0.8)]
+```
 The performance metrics of the 3 models (i.e., logistic regression, random forest, and gradient boosting tree (GBT)) are shown in Figure 1. In the training data sets, GBT has the highest AUC score. However, the GBT score is lowest among the three indicating that the model is overfitting. The highest AUC score is from the random forest model. The feature importance analysis showed that the most important factors are the interest rate, loan term length, applicant's credit health, besides the grade assigned by Lending Club.
 
 # Conclusion
