@@ -8,17 +8,17 @@ excerpt: "Data Wrangling, Machine Learning"
 mathjax: "true"
 ---
 
-# H1 Introduction
+# Introduction
 LendingClub is the world's largest peer-to-peer lending platform. The company enables borrowers to create personal loans between $1,000 and $40,000. The investors can search and browse the loan listings on LendingClub website and select loans that they want to invest based on the information supplied about the borrower. Investor make money from interest. LendingClub makes money by charging borrowers an origination fee and investor a service fee.
 
 This project is to use the historical loan data from LendingClub to build a model that can predict the loan status (whether or not the loan will be default or fully paid). The model also finds the most important factors which impact the prediction from the user information provided by the borrowers. The Lending Club investors can use these results to make better-informed decisions on note choice.
 
-# H1 Data description
+# Data description
 In this project, I mainly worked on LendingClub historical data from 2007 to 2018 on Kaggle. The dataset is 1.55 GB of Size including 2260701 loans and each of which has 150 associated features.
 
 On the other hand, the historical data include some features that are not immediately available when the borrowers create the personal loan. Thus, I used the latest data of the recently listed loans through LendingClub API. Only the features included in the listed loans would be used for model prediction, and other features in the historical data will be excluded. I will match the feature field between the two datasets.
 
-Python code block:
+Match the data feature field:
 ```python
 # For the recent data, I will change the upper case characters to lower characters. For the historical data, I'll remove the underscore '_' from the feature names.
 app_df = app_df.rename(columns = lambda x:x.lower())
@@ -32,6 +32,7 @@ app_diff = set(app_df.columns) - set(hst_df.columns)
 same_col = set(hst_df.columns)&set(app_df.columns)
 hst_match_df = hst_df[same_col]
 ```
+After feature field matching, we excluded the features not avaiable in the recent listed loan data. There are 93 features in the historical data that can be used for model building.
 
 ## H2 Heading
 
