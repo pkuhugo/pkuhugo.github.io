@@ -35,6 +35,8 @@ hst_match_df = hst_df[same_col]
 After feature field matching, we excluded the features not avaiable in the recent listed loan data. There are 93 features in the historical data that can be used for model building.
 
 # Feature Selection
+Here's a [full description](http://rstudio-pubs-static.s3.amazonaws.com/290261_676d9bb194ae4c9882f599e7c0a808f2.html) of each features.
+
 After feature field matching, there are 93 features left. But not all of the features would contribute to the default loan prediction. I conducted the following steps to exclude the features without much information.
 1. I'll drop the features with 50% of the data missing
 2. Split the data in to 'Fully paid' and 'Charged off' group, and use hypothesis test to compare the distributions between the two groups. If the distribution of the feature is not statistically significant different, it will be dropped
