@@ -3,7 +3,7 @@ title: "Predict Default Loans with Lending Club Data"
 date: 2020-07-07
 tags: [data wrangling,  machine learning]
 header:
-  image: "/images/perceptron/percept.jpg"
+  image: "/images/01_lendingclub/loan_by_year.JPG"
 excerpt: "Data Wrangling, Machine Learning"
 mathjax: "true"
 ---
