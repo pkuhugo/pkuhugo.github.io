@@ -93,68 +93,15 @@ Train/Test split:
 df_train = hst_drop_df.loc[hst_drop_df['issued']<hst_drop_df['issued'].quantile(0.8)]
 df_test = hst_drop_df.loc[hst_drop_df['issued']>hst_drop_df['issued'].quantile(0.8)]
 ```
-The performance metrics of the 3 models (i.e., logistic regression, random forest, and gradient boosting tree (GBT)) are shown in Figure 1. In the training data sets, GBT has the highest AUC score. However, the GBT score is lowest among the three indicating that the model is overfitting. The highest AUC score is from the random forest model. The feature importance analysis showed that the most important factors are the interest rate, loan term length, applicant's credit health, besides the grade assigned by Lending Club.
+The performance metrics of the 3 models (i.e., logistic regression, random forest, and gradient boosting tree (GBT)) are shown in Figure 1. In the training data sets, GBT has the significantly higher AUC score than the other two. However, the GBT score is only slightly higher indicating that the model is likely overfitting. The highest AUC score (0.72) is from the gradient boosting tree method.
 
 *Model evaluation: ROC Curves*<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/model.jpg)
+
+The feature importance analysis showed that the top 5 factors are the applicant's credit health (e.g. credit history, months since the oldest revolving account, and months since the oldest installment bank account), borrower's installment to total debt ratio, and borrower's annual income.
 
 *Feature importance*<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/features.jpg)
 
 # Conclusion
-I conducted a quick EDA and prediction model building to evaluate the potential to use lending club historical data to predict the loan default risk. Based on my result, the interest rate, loan term length, applicant's credit score and account numbers were the most important factors when evaluating the loan default risk. The investors can leverage the information available when the loan is created online to quickly identify the good asset to invest. However, the accuracy of this current model has a great potential to improve. More information could be added to the training data set by relating the *zipcode* to meaningful features (e.g. average income). Also, carefully fine-tuned model can also improve the model performance. There are still a lot potentials to improve the result of this project.
-
-
-
-
-## H2 Heading
-
-### H3 Heading
-
-Here's some basic text.
-
-And here's some *italics*
-
-Here's some **bold** text.
-
-What about a [link](https://github.com/dataoptimal)?
-
-Here's a bulleted list:
-* First item
-+ Second item
-- Third item
-
-Here's a numbered list:
-1. First
-2. Second
-3. Third
-
-Python code block:
-```python
-    import numpy as np
-
-    def test_function(x, y):
-      z = np.sum(x,y)
-      return z
-```
-
-R code block:
-```r
-library(tidyverse)
-df <- read_csv("some_file.csv")
-head(df)
-```
-
-Here's some inline code `x+y`.
-
-Here's an image:
-<img src="{{ site.url }}{{ site.baseurl }}/images/perceptron/linsep.jpg" alt="linearly separable data">
-
-Here's another image using Kramdown:
-![alt]({{ site.url }}{{ site.baseurl }}/images/perceptron/linsep.jpg)
-
-Here's some math:
-
-$$z=x+y$$
-
-You can also put it inline $$z=x+y$$
+I conducted a quick EDA and prediction model building to evaluate the potential to use lending club historical data to predict the loan default risk. Based on my result, borrower's credit health (e.g. credit history, months since the oldest revolving account, and months since the oldest installment bank account), borrower's installment to total debt ratio, and borrower's annual income were the most important factors when evaluating the loan default risk. The investors can leverage the information available when the loan is created online to quickly identify the good asset to invest. However, the accuracy of this current model has a great potential to improve. More information could be added to the training data set by relating the *zipcode* to meaningful features (e.g. average income). Also, carefully fine-tuned model can also improve the model performance. There are still a lot potentials to improve the result of this project.
