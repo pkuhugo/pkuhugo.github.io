@@ -101,7 +101,7 @@ The performance metrics of the 3 models (i.e., logistic regression, random fores
 The feature importance analysis showed that the top 5 factors are the applicant's credit health (e.g. credit history, months since the oldest revolving account, and months since the oldest installment bank account), borrower's installment to total debt ratio, and borrower's annual income.
 
 *Feature importance*<br>
-![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/features.jpg)
+![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/features.JPG)
 
 # Conclusion
 I conducted a quick EDA and prediction model building to evaluate the potential to use lending club historical data to predict the loan default risk. Based on my result, borrower's credit health (e.g. credit history, months since the oldest revolving account, and months since the oldest installment bank account), borrower's installment to total debt ratio, and borrower's annual income were the most important factors when evaluating the loan default risk. The investors can leverage the information available when the loan is created online to quickly identify the good asset to invest. However, the accuracy of this current model has a great potential to improve. More information could be added to the training data set by relating the *zipcode* to meaningful features (e.g. average income). Also, carefully fine-tuned model can also improve the model performance. There are still a lot potentials to improve the result of this project.
