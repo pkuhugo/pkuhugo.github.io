@@ -3,7 +3,7 @@ title: "Sentiment Analysis with Amazon Book Review Data"
 date: 2020-07-31
 tags: [machine learning, NLP]
 header:
-  image: "/images/01_lendingclub/loan_by_year2.jpg"
+  image: "/images/03_amazon/words.jpg"
 excerpt: "Machine Learning, NLP"
 mathjax: "true"
 ---
