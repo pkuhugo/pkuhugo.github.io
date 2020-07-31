@@ -3,11 +3,10 @@ title: "Sentiment Analysis with Amazon Book Review Data"
 date: 2020-07-31
 tags: [machine learning, NLP]
 header:
-  image: "/images/03_amazon/words.jpg "
+  image: "/images/01_lendingclub/loan_by_year2.jpg"
 excerpt: "Machine Learning, NLP"
 mathjax: "true"
 ---
-
 # Introduction
 In this project, I conducted the sentimental analysis on the kindle book reviews. In the training dataset, each book review is labeled as 'positive' or 'negative' based on the review content. The goal of this project is to build a predict model to analysis sentiment of the new comments. I'll go through the basic steps of the Natural Language Processing (NLP) and use the Multinomial Naive Bayes algorithm for sentiment prediction.
 
