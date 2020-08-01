@@ -12,13 +12,13 @@ In this project, I conducted the sentimental analysis on the kindle book reviews
 
 # Data
 I obtained the amazon book review data online and saved two important data fields for the model training. The amazon book review data include two columns. The "reviewText" is the raw user review of a certain book, and the "overall", which only has two values ("pos" and "neg") is used to represent "positive" and "negative". In total, the training dataset has 126,871 reviews. For the text data, I'll perform the following steps to extract features for the model training.
-1. Tokenization
-Tokenization splits a phrase, sentence, paragraph, or an entire text document into smaller units, such as characters, word or subword (n-gram characters). In this tokenized form, we can count the number of words in the text, or count the frequency of the word. It's the start of extracting useful information from text data. In this project, I used the NLTK python package for tokenization.
-2. Normalization
+1. Tokenization<br>
+Tokenization splits a phrase, sentence, paragraph, or an entire text document into smaller units, such as characters, word or subword (n-gram characters). In this tokenized form, we can count the number of words in the text, or count the frequency of the word. It's the start of extracting useful information from text data. In this project, I used the NLTK python package for tokenization.<br>
+2. Normalization<br>
 The first step of normalization is to remove the stopwords and punctuation. Stopwords are the most common words used in any natural language. For the purpose of analyzing test data and extract useful information, these commonly used words may not carry much value. The most common words used in a text are "the", "is", "in" etc. The NLTK package includes a collection of common stopwords and would be used to remove them. Punctuations sometimes have useful information, such as emotion and parsing of the sentence. In this project, I was dealing with large corpora, thus I removed the punctuations for simplicity.
-After removing the stopwords and punctuation, I applied lemmatization to the remaining tokens of word. In english, words appear in several forms. For example, the verb "to walk" may apper as "take", "takes" or "taken". The base form, "take", that one might look up in a dictionary, is called the lemma for the word. Stemming is the process of reducing the inflection in words to their root forms such as mappting a group of words to the same stem even if the stem itself is not a valid word in the language. For example, the root of "takes" and "taken" is "tak".
-Lemmatisation is closely related to stemming. The difference is that a stemmer operates on a single word without knowledge of the context, and therefore cannot discriminate between words which have different meanings depending on part of speech. However, stemmers are typically easier to implement and run faster. The reduced "accuracy" may not matter for some applications. In fact, when used within information retrieval systems, stemming improves query recall accuracy, or true positive rate, when compared to lemmatisation. Nonetheless, stemming reduces precision, or true negative rate, for such systems. For instance, the word "better" has "good" as its lemma. This link is missed by stemming, as it requires a dictionary look-up.
-3. bag of words
+After removing the stopwords and punctuation, I applied lemmatization to the remaining tokens of word. In english, words appear in several forms. For example, the verb "to walk" may apper as "take", "takes" or "taken". The base form, "take", that one might look up in a dictionary, is called the lemma for the word. Stemming is the process of reducing the inflection in words to their root forms such as mappting a group of words to the same stem even if the stem itself is not a valid word in the language. For example, the root of "takes", "take" and "taken" is "tak".<br>
+Lemmatization is closely related to stemming. The difference is that a stemmer operates on a single word without knowledge of the context, and therefore cannot discriminate between words which have different meanings depending on part of speech. However, stemmers are typically easier to implement and run faster. The reduced "accuracy" may not matter for some applications. In fact, when used within information retrieval systems, stemming improves query recall accuracy, or true positive rate, when compared to lemmatisation. Nonetheless, stemming reduces precision, or true negative rate, for such systems. For instance, the word "better" has "good" as its lemma. This link is missed by stemming, as it requires a dictionary look-up.
+3. bag of words<br>
 The normalized tokens would be saved in a field, like a bag of words. The bag-of-words includes information about the vocabulary of the text and the frequency of known words. The information about the order or structure of words in the document is lost using the bag-of-word model.
 
 ```python
@@ -48,11 +48,13 @@ print(end - start)
 4. tf-idf vectorizer
 - Tf: the term frequency of a word in a document. There are several ways of calculating this frequency, with the simplest being a raw count of instance a word appears in a document.
 - idf: inverse document-frequency
-- Tf-idf = $tf(t,d) \times idf(t)$
+- Tf-idf = $$tf(t,d) \times idf(t)$$<br>
+<br>
 $$
 idf(t) = log{\frac{1 + nd}{1 + df(d, t)}} + 1
 $$
-where n is the total number of documents in the document set and df(t) is the document frequency of t; the document frequency is the number of documents in the document set that contain the term t. The effect of adding “1” to the idf in the equation above is that terms with zero idf, i.e., terms that occur in all documents in a training set, will not be entirely ignored.
+<br>
+where n is the total number of documents in the document set and df(t) is the document frequency of t; the document frequency is the number of documents in the document set that contain the term t. The effect of adding “1” to the idf in the equation above is that terms with zero idf, i.e., terms that occur in all documents in a training set, will not be entirely ignored.<br>
 ![](http://www.onemathematicalcat.org/Math/Algebra_II_obj/Graphics/log_base_gt1.gif)
 
 Tf-idf works by increasing proportionally to the number of times a word appears in a document, but is offset by the number of documents that cotain the word. So, words that are common in every document, such as this, what and I, ranked low even though their count is large, since they don't mean much to the particular document. However, if the word "amazing" appears many times in a review text, while not appearing many times in others, it probably means that it's relevant and the reviewer liked it.
@@ -109,5 +111,5 @@ predict_new("I can't stop reading it")
 ```
 And the result is 'pos'!
 
-#Summary
+# Summary
 I built a sentiment analysis model based on the amazon book review data. The bag-of-word method and Multinomial Naive Bayes algorithm is used for model training. For NLP analysis, the preprocessing on the text data is very important for feature extraction. In this project, I went through tokenization, removing stopwords and punctuation, lemmatization and tf-idf. In the end, the model was able to identify the positive and negative reviews.
