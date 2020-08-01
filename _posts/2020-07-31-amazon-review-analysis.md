@@ -46,15 +46,17 @@ end = time.time()
 print(end - start)  
 ```
 4. tf-idf vectorizer
-- Tf: the term frequency of a word in a document. There are several ways of calculating this frequency, with the simplest being a raw count of instance a word appears in a document.
-- idf: inverse document-frequency
-- Tf-idf = $$tf(t,d) \times idf(t)$$<br>
+Tf: the term frequency of a word in a document. There are several ways of calculating this frequency, with the simplest being a raw count of instance a word appears in a document.
+idf: inverse document-frequency
+Tf-idf = $$tf(t,d) \times idf(t)$$<br>
 <br>
 $$
 idf(t) = log{\frac{1 + nd}{1 + df(d, t)}} + 1
 $$
 <br>
+
 where n is the total number of documents in the document set and df(t) is the document frequency of t; the document frequency is the number of documents in the document set that contain the term t. The effect of adding “1” to the idf in the equation above is that terms with zero idf, i.e., terms that occur in all documents in a training set, will not be entirely ignored.<br>
+
 ![](http://www.onemathematicalcat.org/Math/Algebra_II_obj/Graphics/log_base_gt1.gif)
 
 Tf-idf works by increasing proportionally to the number of times a word appears in a document, but is offset by the number of documents that cotain the word. So, words that are common in every document, such as this, what and I, ranked low even though their count is large, since they don't mean much to the particular document. However, if the word "amazing" appears many times in a review text, while not appearing many times in others, it probably means that it's relevant and the reviewer liked it.
