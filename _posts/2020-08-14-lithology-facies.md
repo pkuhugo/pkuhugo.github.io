@@ -59,8 +59,63 @@ The crossplots are used to visualize how tow features vary with rock type. We cr
 The relationship between the well-log features and the lithofacies is complicated. In the training dataset, we only have 5 well-log features and 2 derived features. To reveal the underline relationship, we proposed the following feature augmentation.
 1. neighboring value
 2. gradient
-3. quadratic expansion <br>
+3. quadratic expansion
+
 After the Feature Engineering, the total number of features increased to 435.<br>
+
+```python
+# Feature windows concatenation function
+def augment_features_window(X, N_neig):
+
+    # Parameters
+    N_row = X.shape[0]
+    N_feat = X.shape[1]
+
+    # Zero padding
+    X = np.vstack((np.zeros((N_neig, N_feat)), X, (np.zeros((N_neig, N_feat)))))
+
+    # Loop over windows
+    X_aug = np.zeros((N_row, N_feat*(2*N_neig+1)))
+    for r in np.arange(N_row)+N_neig:
+        this_row = []
+        for c in np.arange(-N_neig,N_neig+1):
+            this_row = np.hstack((this_row, X[r+c]))
+        X_aug[r-N_neig] = this_row
+
+    return X_aug
+
+
+# Feature gradient computation function
+def augment_features_gradient(X, depth):
+
+    # Compute features gradient
+    d_diff = np.diff(depth).reshape((-1, 1))
+    d_diff[d_diff==0] = 0.001
+    X_diff = np.diff(X, axis=0)
+    X_grad = X_diff / d_diff
+
+    # Compensate for last missing value
+    X_grad = np.concatenate((X_grad, np.zeros((1, X_grad.shape[1]))))
+
+    return X_grad
+
+
+# Feature augmentation function
+def augment_features(X, well, depth, N_neig=1):
+
+    # Augment features
+    X_aug = np.zeros((X.shape[0], X.shape[1]*(N_neig*2+2)))
+    for w in np.unique(well):
+        w_idx = np.where(well == w)[0]
+        X_aug_win = augment_features_window(X[w_idx, :], N_neig)
+        X_aug_grad = augment_features_gradient(X[w_idx, :], depth[w_idx])
+        X_aug[w_idx, :] = np.concatenate((X_aug_win, X_aug_grad), axis=1)
+
+    # Find padded rows
+    padded_rows = np.unique(np.where(X_aug[:, 0:7] == np.zeros((1, 7)))[0])
+
+    return X_aug, padded_rows
+```
 
 Quadratic expansion
 ```python
@@ -93,7 +148,7 @@ The implementation of the Gradient Boosting Tree (GBT) takes a number of importa
 3. "learning_rate": It is also called "eta". Step size shrinkage used in update to prevents overfitting.<br>
 4. "min_child_weight": Minimum sum of instance weight (hessian) needed in a child.<br>
 5. "subsample": Subsample ratio of the training instances.<br>
-6. "colsample_bytree": Subsample ratio of columns when constructing each tree. More details about the parameters of XGBoost can be found at: https://xgboost.readthedocs.io/en/latest/parameter.html#<br>
+6. "colsample_bytree": Subsample ratio of columns when constructing each tree. More details about the parameters of XGBoost can be found at: [https://xgboost.readthedocs.io/en/latest/parameter.html](https://xgboost.readthedocs.io/en/latest/parameter.html)<br>
 ## Hyper-Parameter Tuning
 The parameter tuning was conducted using python package hyperopt.<br>
 The hyperopt packages uses the parameter search algorithm based on the Bayesian theory. The previously used parameter $\Theta$1 will create a expected post-loss function F, and the new parameter $\Theta$2 is derived to maximum the post-loss function. The $\Theta$2 is used to fit the data and if the score is better, $\Theta$2 would be used to update post-loss function F, and $\Theta$3 will be derived from maximizing the new F, and the process goes on until the number of iteration reached.
