@@ -47,7 +47,7 @@ Facies |Label| Adjacent Facies
 9 |BS| 7,8
 
 Here's the depth profiles for the fine well-log measurements and the corresponding facies label:
-![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/01_profile.png)
+![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/01_profiles1.png)
 
 Distribution of the training data by Facies:
 ![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/02_distribution.png)
@@ -60,7 +60,7 @@ The relationship between the well-log features and the lithofacies is complicate
 1. neighboring value
 2. gradient
 3. quadratic expansion
-After the Feature Engineering, the total number of features increased to 435.
+After the Feature Engineering, the total number of features increased to 435.<br>
 ```python
 # Feature windows concatenation function
 def augment_features_window(X, N_neig):
@@ -116,6 +116,7 @@ def augment_features(X, well, depth, N_neig=1):
 
 X_aug, padded_rows = augment_features(X, well, depth)
 ```
+
 Quadratic expansion
 ```python
 deg = 2
@@ -142,14 +143,14 @@ blind_scaled = scaler.transform(blind)
 
 ## Gradient Boosting Tree
 The implementation of the Gradient Boosting Tree (GBT) takes a number of important parameters. We will be using cross-validation to select the best values for the following parameters used in the XGBoost classifier:
-
-"max depth": Maximum depth of a tree. Increasing this value will make the model more complex and more likely to overfit.
-"n_estimators": the number of the boosting trees.
-"learning_rate": It is also called "eta". Step size shrinkage used in update to prevents overfitting.
-"min_child_weight": Minimum sum of instance weight (hessian) needed in a child.
-"subsample": Subsample ratio of the training instances.
-"colsample_bytree": Subsample ratio of columns when constructing each tree. More details about the parameters of XGBoost can be found at: https://xgboost.readthedocs.io/en/latest/parameter.html#
-The parameter tuning was conducted using python package hyperopt.
+1. "max depth": Maximum depth of a tree. Increasing this value will make the model more complex and more likely to overfit.<br>
+2. "n_estimators": the number of the boosting trees.<br>
+3. "learning_rate": It is also called "eta". Step size shrinkage used in update to prevents overfitting.<br>
+4. "min_child_weight": Minimum sum of instance weight (hessian) needed in a child.<br>
+5. "subsample": Subsample ratio of the training instances.<br>
+6. "colsample_bytree": Subsample ratio of columns when constructing each tree. More details about the parameters of XGBoost can be found at: https://xgboost.readthedocs.io/en/latest/parameter.html#<br>
+## Hyper-Parameter Tuning
+The parameter tuning was conducted using python package hyperopt.<br>
 The hyperopt packages uses the parameter search algorithm based on the Bayesian theory. The previously used parameter $\Theta$1 will create a expected post-loss function F, and the new parameter $\Theta$2 is derived to maximum the post-loss function. The $\Theta$2 is used to fit the data and if the score is better, $\Theta$2 would be used to update post-loss function F, and $\Theta$3 will be derived from maximizing the new F, and the process goes on until the number of iteration reached.
 
 ```python
@@ -204,7 +205,7 @@ print('Adjacent facies classification accuracy = %f' % accuracy_adjacent(conf, a
 Adjacent facies classification accuracy = 0.866337*
 
 We compared the predicted and labeled facies on the depth profiles:
-![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/04_profile2.png)
+![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/04_profiles2.png)
 
 # Summary
 The 9 well-log data set was used to develop a lithology facies classification model. There are 5 well-log measurements and 2 geologically derived features. We expanded the predictor feature numbers to 435, using augment, gradient, and polynomial terms. We tried two classification algorithms, SVM and Gradient Boosting Trees. The performance of gradient boosting trees was better than SVM. The classifier achieved an accuracy of 0.80 on the training data set and 0.56 on the blind left-out set. There training dataset is still relatively small, and the imbalanced data may be the reason that the model performance dropped sharply in the test data set.
