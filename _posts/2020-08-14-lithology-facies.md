@@ -59,9 +59,9 @@ The crossplots are used to visualize how tow features vary with rock type. We cr
 The relationship between the well-log features and the lithofacies is complicated. In the training dataset, we only have 5 well-log features and 2 derived features. To reveal the underline relationship, we proposed the following feature augmentation.
 1. neighboring value
 2. gradient
-3. quadratic expansion
+3. quadratic expansion <br>
 After the Feature Engineering, the total number of features increased to 435.<br>
-```python
+<!-- ```python
 # Feature windows concatenation function
 def augment_features_window(X, N_neig):
 
@@ -115,7 +115,7 @@ def augment_features(X, well, depth, N_neig=1):
     return X_aug, padded_rows
 
 X_aug, padded_rows = augment_features(X, well, depth)
-```
+``` -->
 
 Quadratic expansion
 ```python
