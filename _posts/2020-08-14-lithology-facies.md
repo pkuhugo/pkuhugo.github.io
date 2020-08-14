@@ -3,7 +3,7 @@ title: "Lithology Facies Classification"
 date: 2020-08-14
 tags: [machine learning, Feature Engineering]
 header:
-  image: "/images/02_well/profiles_cut.jpg "
+  image: "/images/04_facies/00_profiles.png"
 excerpt: "Machine Learning, Feature Engineering"
 mathjax: "true"
 ---
