@@ -12,9 +12,9 @@ mathjax: "true"
 In this project, I am going to demonstrate using the machine learning algorithms to identify lithofacies based on well-log measurements. A supervised-learning algorithm Gradient Boosting Tree is trained by 9 well-log data. These wells have already had lithofacies classes assigned. Once the classifier is trained, I'll use it to assign facies to wells that have not been described.
 
 # Data Description
-The demo data set was from Univeristy of Kansas and they were collected on the Hugoton and Panoma gas fields. For more on the origin of the data, see Dubois et al. (2007) and the Jupyter notebook that accompanies this tutorial at [http://github.com/seg](http://github.com/seg).
+The demo data set was from University of Kansas and they were collected on the Hugoton and Panoma gas fields. For more on the origin of the data, see Dubois et al. (2007) and the Jupyter notebook that accompanies this tutorial at [http://github.com/seg](http://github.com/seg).
 
-The data set included 9 wells data, and there were 3232 observations. There are 9 columns in the data table, including 5 wireline log measurements, 2 indicator variables derived from geologic knowledge, a facies lable at half foot intervals, and a relative position.
+The data set included 9 wells data, and there were 3232 observations. There are 9 columns in the data table, including 5 wireline log measurements, 2 indicator variables derived from geologic knowledge, a facies label at half foot intervals, and a relative position.
 
 The seven predictor variables are:
 * Five wire line log curves include [gamma ray](http://petrowiki.org/Gamma_ray_logs) (GR), [resistivity logging](http://petrowiki.org/Resistivity_and_spontaneous_%28SP%29_logging) (ILD_log10),
