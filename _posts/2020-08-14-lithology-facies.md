@@ -49,7 +49,7 @@ Facies |Label| Adjacent Facies
 Here's the depth profiles for the fine well-log measurements and the corresponding facies label:
 ![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/01_profiles1.png)
 
-Distribution of the training data by Facies:
+Distribution of the training data by Facies:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/02_distribution.png)
 
 The crossplots are used to visualize how tow features vary with rock type. We created a matrix of crossplots to visualize the variation between log measurements in the data set.
