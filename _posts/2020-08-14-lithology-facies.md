@@ -4,7 +4,7 @@ date: 2020-08-14
 tags: [machine learning]
 header:
   image: "/images/02_well/profiles_cut.jpg "
-excerpt: "Machine Learning", "Feature Engineering"
+excerpt: "Machine Learning, Feature Engineering"
 mathjax: "true"
 ---
 
