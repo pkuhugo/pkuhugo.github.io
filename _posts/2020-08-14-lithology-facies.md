@@ -1,7 +1,7 @@
 ---
 title: "Lithology Facies Classification"
 date: 2020-08-14
-tags: [machine learning]
+tags: [machine learning, Feature Engineering]
 header:
   image: "/images/02_well/profiles_cut.jpg "
 excerpt: "Machine Learning, Feature Engineering"
@@ -149,6 +149,7 @@ The implementation of the Gradient Boosting Tree (GBT) takes a number of importa
 4. "min_child_weight": Minimum sum of instance weight (hessian) needed in a child.<br>
 5. "subsample": Subsample ratio of the training instances.<br>
 6. "colsample_bytree": Subsample ratio of columns when constructing each tree. More details about the parameters of XGBoost can be found at: [https://xgboost.readthedocs.io/en/latest/parameter.html](https://xgboost.readthedocs.io/en/latest/parameter.html)<br>
+
 ## Hyper-Parameter Tuning
 The parameter tuning was conducted using python package hyperopt.<br>
 The hyperopt packages uses the parameter search algorithm based on the Bayesian theory. The previously used parameter $\Theta$1 will create a expected post-loss function F, and the new parameter $\Theta$2 is derived to maximum the post-loss function. The $\Theta$2 is used to fit the data and if the score is better, $\Theta$2 would be used to update post-loss function F, and $\Theta$3 will be derived from maximizing the new F, and the process goes on until the number of iteration reached.
@@ -201,8 +202,8 @@ conf = confusion_matrix(blind_y, predicted_labels)
 print('Facies classification accuracy = %f' % accuracy(conf))
 print('Adjacent facies classification accuracy = %f' % accuracy_adjacent(conf, adjacent_facies))
 ```
-*Facies classification accuracy = 0.559406
-Adjacent facies classification accuracy = 0.866337*
+*Facies classification accuracy = 0.559406*<br>
+*Adjacent facies classification accuracy = 0.866337*
 
 We compared the predicted and labeled facies on the depth profiles:
 ![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/04_profiles2.png)
