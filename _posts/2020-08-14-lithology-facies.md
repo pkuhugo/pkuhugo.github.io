@@ -46,13 +46,13 @@ Facies |Label| Adjacent Facies
 8 |PS| 6,7,9
 9 |BS| 7,8
 
-Here's the depth profiles for the fine well-log measurements and the corresponding facies label:
+Here's the depth profiles for the fine well-log measurements and the corresponding facies label:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/01_profiles1.png)
 
 Distribution of the training data by Facies:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/02_distribution.png)
 
-The crossplots are used to visualize how tow features vary with rock type. We created a matrix of crossplots to visualize the variation between log measurements in the data set.
+The crossplots are used to visualize how tow features vary with rock type. We created a matrix of crossplots to visualize the variation between log measurements in the data set.<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/03_crossplot.png)
 
 # Feature engineering
@@ -152,7 +152,7 @@ The implementation of the Gradient Boosting Tree (GBT) takes a number of importa
 
 ## Hyper-Parameter Tuning
 The parameter tuning was conducted using python package hyperopt.<br>
-The hyperopt packages uses the parameter search algorithm based on the Bayesian theory. The previously used parameter $\Theta$1 will create a expected post-loss function F, and the new parameter $$\Theta$$2 is derived to maximum the post-loss function. The $\Theta$2 is used to fit the data and if the score is better, $\Theta$2 would be used to update post-loss function F, and $\Theta$3 will be derived from maximizing the new F, and the process goes on until the number of iteration reached.
+The hyperopt packages uses the parameter search algorithm based on the Bayesian theory. My understanding is that,  the previously used parameter $$\Theta1$$ will create a expected post-loss function F, and the new parameter $$\Theta2$$ is derived to maximum the post-loss function. The $\Theta2$ is used to fit the data and if the score is better, $$\Theta2$$ would be used to update post-loss function F, and $$\Theta3$$ will be derived from maximizing the new F, and the process goes on until the number of iteration reached.
 
 ```python
 space={
