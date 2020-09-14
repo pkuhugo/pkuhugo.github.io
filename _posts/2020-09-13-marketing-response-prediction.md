@@ -33,16 +33,16 @@ The features are classified to three categories:
 3. social and economic factors: emp.var.rate, cons.price.idx, cons.conf.idx, eribor3m, nr.employed
 
 Customer Age:
-![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/04_age.jpg)
+![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/04_age.JPG)
 
 Previous Outcome:
-![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/01_poutcome.jpg)
+![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/01_poutcome.JPG)
 
 Macro Economic Index:
-![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/02_rate.jpg)
+![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/02_rate.JPG)
 
 Campaign Month:
-![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/03_month.jpg)
+![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/03_month.JPG)
 
 By plotting the statistics of the predictors in the training dataset, I gained some intuitive thoughts of the relationship between the predictor and target variables. For some features, the distributions in the response and non-response customers are indistinguishable, which made them potentially not strong predictors, like customer age. On the other hand, some predictors show different values for different type of customers, for instance, previous campain outcome, the European 3 months rate, and the campaign conduct time.  
 
@@ -55,7 +55,7 @@ euribor3m and nr.employed
 Thus, we are going to drop "pmomths", "emp.var.rate", "nr.employed" from the predictor features in order to get more stable models.
 
 Campaign Month:
-![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/05_corr.jpg)
+![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/05_corr.JPG)
 
 ## Handling Missing Data
 In both train and test datasets, three features contain missing data: custAge, schooling, and day_of_week. Among these three features, custAge is a numeric feature, while schooling and day_of_week are categorical features. By plotting the statistics of the custAge, I did not observe a strong relationship between the feature and the target value, thus it's acceptable to impute the missing data with the median value of custAge, which is 38. For the categorical features with missing data, I replaced the missing data with an additional category "missing_value", which is similar to the "unknown" value in those features.
@@ -150,7 +150,7 @@ best = fmin(fn=objective,
 print("Best: ", best)
 ```
 ROC of different models:
-![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/06_roc.jpg)
+![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/06_roc.JPG)
 
 Now, we have to decide which model is the best model, and we have two types of wrong values:<br>
 1. False positive, means the customers did not response to the campaign, but the model thinks they did
@@ -159,7 +159,7 @@ Now, we have to decide which model is the best model, and we have two types of w
 I think the second is most harmful, because we may miss the target customers who are most likely to buy the insurance in the feature campaign. The first error is ok, since the worst thing is to spend some extra money, but we won't loose potential customers.
 
 Confusion Matrix of Gradient Boosting Tree Result:
-![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/07_metrics.jpg)
+![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/07_metrics.JPG)
 
 The random forest and gradient boosting tree models average performance was similar with ROC AUC score near 0.8, but on the class responded with 'Yes' value, the gradient boosting tree model is slightly better. In the three models, the model performance was not so great in class responded with 'Yes'. The best recall score is only 0.23, which means only 23% potential customers were correctly predicted, even though the weighted average recall is 0.88. There's still some potential to fine tune the model to increase the prediction result in class 'Yes'. The top important factors of predicting customer response are also identified based on the importance analysis. The strong indicators of the customer response are: previous campaign outcome, previous contact, macro economic, campaign month, and contact type.
 
