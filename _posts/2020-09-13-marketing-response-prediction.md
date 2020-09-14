@@ -99,7 +99,8 @@ In this assignment, the number of data with target value 0 is about 8 times the 
 oversample = SMOTE()
 X_train, y_train = oversample.fit_resample(X_train, y_train)
 ```
-
+<br>
+<br>
 # Model Training and Model Selection
 The training data was split into two parts: training and validation with a ratio of 8:2. The models are training using K-fold methods to avoid overfitting. The parameters were tuned based on grid search or a Bayesian-based hyper-parameter tuning method. The ROC AUC score was used to evaluate the model since the imbalance of the sample numbers in a different class.
 
