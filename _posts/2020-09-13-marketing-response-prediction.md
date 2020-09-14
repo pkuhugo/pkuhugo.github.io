@@ -32,16 +32,16 @@ The features are classified to three categories:
 2. related with bank activity: cantact, month, day_of_week, compaign, pdays, pmonth, previous, poutcome, pastemail,
 3. social and economic factors: emp.var.rate, cons.price.idx, cons.conf.idx, eribor3m, nr.employed
 
-Customer Age:
+Customer Age:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/04_age.JPG)
 
-Previous Outcome:
+Previous Outcome:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/01_poutcome.JPG)
 
-Macro Economic Index:
+Macro Economic Index:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/02_rate.JPG)
 
-Campaign Month:
+Campaign Month:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/03_month.JPG)
 
 By plotting the statistics of the predictors in the training dataset, I gained some intuitive thoughts of the relationship between the predictor and target variables. For some features, the distributions in the response and non-response customers are indistinguishable, which made them potentially not strong predictors, like customer age. On the other hand, some predictors show different values for different type of customers, for instance, previous campain outcome, the European 3 months rate, and the campaign conduct time.  
@@ -54,7 +54,7 @@ emp.var.rate and euribor3m
 euribor3m and nr.employed
 Thus, we are going to drop "pmomths", "emp.var.rate", "nr.employed" from the predictor features in order to get more stable models.
 
-Campaign Month:
+Correlation Matrix:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/05_corr.JPG)
 
 ## Handling Missing Data
@@ -149,7 +149,7 @@ best = fmin(fn=objective,
 
 print("Best: ", best)
 ```
-ROC of different models:
+ROC of different models:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/06_roc.JPG)
 
 Now, we have to decide which model is the best model, and we have two types of wrong values:<br>
@@ -158,7 +158,7 @@ Now, we have to decide which model is the best model, and we have two types of w
 
 I think the second is most harmful, because we may miss the target customers who are most likely to buy the insurance in the feature campaign. The first error is ok, since the worst thing is to spend some extra money, but we won't loose potential customers.
 
-Confusion Matrix of Gradient Boosting Tree Result:
+Confusion Matrix of Gradient Boosting Tree Result:<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/05_marketing/07_metrics.JPG)
 
 The random forest and gradient boosting tree models average performance was similar with ROC AUC score near 0.8, but on the class responded with 'Yes' value, the gradient boosting tree model is slightly better. In the three models, the model performance was not so great in class responded with 'Yes'. The best recall score is only 0.23, which means only 23% potential customers were correctly predicted, even though the weighted average recall is 0.88. There's still some potential to fine tune the model to increase the prediction result in class 'Yes'. The top important factors of predicting customer response are also identified based on the importance analysis. The strong indicators of the customer response are: previous campaign outcome, previous contact, macro economic, campaign month, and contact type.
