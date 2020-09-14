@@ -16,7 +16,7 @@ This project is to use the historical loan data from LendingClub to build a mode
 # Data description
 In this project, I mainly worked on LendingClub historical data from 2007 to 2018 on Kaggle. The dataset is 1.55 GB of Size including 2260701 loans and each of which has 150 associated features.
 
-On the other hand, the historical data include some features that are not immediately available when the borrowers create the personal loan. Thus, I used the latest data of the recently listed loans through LendingClub API. Only the features included in the listed loans would be used for model prediction, and other features in the historical data will be excluded. I will match the feature field between the two datasets.
+On the other hand, the historical data includes some features that are not immediately available when the borrowers create a personal loan. Thus, I used the latest data of the recently listed loans through LendingClub API. Only the features included in the listed loans would be used for model prediction, and other features in the historical data will be excluded. I will match the feature field between the two datasets.
 
 Match the data feature field:
 ```python
@@ -32,7 +32,7 @@ app_diff = set(app_df.columns) - set(hst_df.columns)
 same_col = set(hst_df.columns)&set(app_df.columns)
 hst_match_df = hst_df[same_col]
 ```
-After feature field matching, we excluded the features not avaiable in the recent listed loan data. There are 93 features in the historical data that can be used for model building.
+After feature field matching, we excluded the features not available in the recent listed loan data. There are 93 features in the historical data that can be used for model building.
 
 # Feature Selection
 Here's a [full description](http://rstudio-pubs-static.s3.amazonaws.com/290261_676d9bb194ae4c9882f599e7c0a808f2.html) of each features.
@@ -93,15 +93,15 @@ Train/Test split:
 df_train = hst_drop_df.loc[hst_drop_df['issued']<hst_drop_df['issued'].quantile(0.8)]
 df_test = hst_drop_df.loc[hst_drop_df['issued']>hst_drop_df['issued'].quantile(0.8)]
 ```
-The performance metrics of the 3 models (i.e., logistic regression, random forest, and gradient boosting tree (GBT)) are shown in Figure 1. In the training data sets, GBT has the significantly higher AUC score than the other two. However, the GBT score is only slightly higher indicating that the model is likely overfitting. The highest AUC score (0.72) is from the gradient boosting tree method.
+The performance metrics of the 3 models (i.e., logistic regression, random forest, and gradient boosting tree (GBT)) are shown in Figure 1. In the training data sets, GBT has a significantly higher AUC score than the other two. However, the GBT score is only slightly higher indicating that the model is likely overfitting. The highest AUC score (0.72) is from the gradient boosting tree method.
 
 *Model evaluation: ROC Curves*<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/model.jpg)
 
-The feature importance analysis showed that the top 5 factors are the applicant's credit health (e.g. credit history, months since the oldest revolving account, and months since the oldest installment bank account), borrower's installment to total debt ratio, and borrower's annual income.
+The feature importance analysis showed that the top 5 factors are the applicant's credit health (e.g. credit history, months since the oldest revolving account, and months since the oldest installment bank account), borrower's installment to total debt ratio, and borrower'annual income.
 
 *Feature importance*<br>
 ![alt]({{ site.url }}{{ site.baseurl }}/images/01_lendingclub/features.JPG)
 
 # Conclusion
-I conducted a quick EDA and prediction model building to evaluate the potential to use lending club historical data to predict the loan default risk. Based on my result, borrower's credit health (e.g. credit history, months since the oldest revolving account, and months since the oldest installment bank account), borrower's installment to total debt ratio, and borrower's annual income were the most important factors when evaluating the loan default risk. The investors can leverage the information available when the loan is created online to quickly identify the good asset to invest. However, the accuracy of this current model has a great potential to improve. More information could be added to the training data set by relating the *zipcode* to meaningful features (e.g. average income). Also, carefully fine-tuned model can also improve the model performance. There are still a lot potentials to improve the result of this project.
+I conducted a quick EDA and prediction model building to evaluate the potential to use lending club historical data to predict the loan default risk. Based on my result, borrower's credit health (e.g. credit history, months since the oldest revolving account, and months since the oldest installment bank account), borrower's installment to total debt ratio, and borrower's annual income were the most important factors when evaluating the loan default risk. The investors can leverage the information available when the loan is created online to quickly identify the good asset to invest. However, the accuracy of this current model has great potential to improve. More information could be added to the training data set by relating the *zipcode* to meaningful features (e.g. average income). Also, a carefully fine-tuned model can also improve the model performance. There are still a lot of potentials to improve the result of this project.
