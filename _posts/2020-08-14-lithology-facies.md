@@ -14,7 +14,7 @@ In this project, I am going to demonstrate using the machine learning algorithms
 # Data Description
 The demo data set was from University of Kansas and they were collected on the Hugoton and Panoma gas fields. For more on the origin of the data, see Dubois et al. (2007) and the Jupyter notebook that accompanies this tutorial at [http://github.com/seg](http://github.com/seg).
 
-The data set included 9 wells data, and there were 3232 observations. There are 9 columns in the data table, including 5 wireline log measurements, 2 indicator variables derived from geologic knowledge, a facies label at half foot intervals, and a relative position.
+The data set included 9 wells data, and there were 3232 observations. There are 9 columns in the data table, including 5 wireline log measurements, 2 indicator variables derived from geologic knowledge, a facies label at half-foot intervals, and a relative position.
 
 The seven predictor variables are:
 * Five wire line log curves include [gamma ray](http://petrowiki.org/Gamma_ray_logs) (GR), [resistivity logging](http://petrowiki.org/Resistivity_and_spontaneous_%28SP%29_logging) (ILD_log10),
@@ -32,7 +32,7 @@ The nine discrete facies (classes of rocks) are:
 8. Packstone-grainstone (limestone)
 9. Phylloid-algal bafflestone (limestone)
 
-These facies aren't discrete, and gradually blend into one another. Some have neighboring facies that are rather close.  Mislabeling within these neighboring facies can be expected to occur.  The following table lists the facies, their abbreviated labels and their approximate neighbors.
+These facies aren't discrete and gradually blend into one another. Some have neighboring facies that are rather close.  Mislabeling within these neighboring facies can be expected to occur.  The following table lists the facies, their abbreviated labels ,and their approximate neighbors.
 
 Facies |Label| Adjacent Facies
 :---: | :---: |:--:
@@ -145,14 +145,14 @@ blind_scaled = scaler.transform(blind)
 The implementation of the Gradient Boosting Tree (GBT) takes a number of important parameters. We will be using cross-validation to select the best values for the following parameters used in the XGBoost classifier:
 1. "max depth": Maximum depth of a tree. Increasing this value will make the model more complex and more likely to overfit.<br>
 2. "n_estimators": the number of the boosting trees.<br>
-3. "learning_rate": It is also called "eta". Step size shrinkage used in update to prevents overfitting.<br>
+3. "learning_rate": It is also called "eta". Step size shrinkage used in the update to prevents overfitting.<br>
 4. "min_child_weight": Minimum sum of instance weight (hessian) needed in a child.<br>
 5. "subsample": Subsample ratio of the training instances.<br>
 6. "colsample_bytree": Subsample ratio of columns when constructing each tree. More details about the parameters of XGBoost can be found at: [https://xgboost.readthedocs.io/en/latest/parameter.html](https://xgboost.readthedocs.io/en/latest/parameter.html)<br>
 
 ## Hyper-Parameter Tuning
 The parameter tuning was conducted using python package hyperopt.<br>
-The hyperopt packages uses the parameter search algorithm based on the Bayesian theory. My understanding is that,  the previously used parameter $$\Theta1$$ will create a expected post-loss function F, and the new parameter $$\Theta2$$ is derived to maximum the post-loss function. The $$\Theta2$$ is used to fit the data and if the score is better, $$\Theta2$$ would be used to update post-loss function F, and $$\Theta3$$ will be derived from maximizing the new F, and the process goes on until the number of iteration reached.
+The hyperopt packages use the parameter search algorithm based on the Bayesian theory. My understanding is that,  the previously used parameter $$\Theta1$$ will create an expected post-loss function F, and the new parameter $$\Theta2$$ is derived to maximum the post-loss function. The $$\Theta2$$ is used to fit the data and if the score is better, $$\Theta2$$ would be used to update post-loss function F, and $$\Theta3$$ will be derived from maximizing the new F, and the process goes on until the number of iteration reached.
 
 ```python
 space={
@@ -195,7 +195,7 @@ print(best)
 ```
 
 # Model Validation with Blind Data
-To evaluate the accuracy of our classifier, we predicted the lithofacies label using the well we left out and compared to the actual ones. The predictor features had been pre-processed the same way as the training data set. Our gradient boosting trees based classifier achieved an accuracy of 0.80 on the training data set, which is better than the commonly used SVM model. On the blind test data, the accuracy is 0.56, so there is room for experiment. If we count misclassification with adjacent faces as correct, the classifier has an accuracy close to 0.87.
+To evaluate the accuracy of our classifier, we predicted the lithofacies label using the well we left out and compared it to the actual ones. The predictor features had been pre-processed the same way as the training data set. Our gradient boosting trees based classifier achieved an accuracy of 0.80 on the training data set, which is better than the commonly used SVM model. On the blind test data, the accuracy is 0.56, so there is room for experiment. If we count misclassification with adjacent faces as correct, the classifier has an accuracy close to 0.87.
 ```python
 predicted_labels = clf_hp.predict(blind_scaled)
 conf = confusion_matrix(blind_y, predicted_labels)
@@ -209,4 +209,4 @@ We compared the predicted and labeled facies on the depth profiles:
 ![alt]({{ site.url }}{{ site.baseurl }}/images/04_facies/04_profiles2.png)
 
 # Summary
-The 9 well-log data set was used to develop a lithology facies classification model. There are 5 well-log measurements and 2 geologically derived features. We expanded the predictor feature numbers to 435, using augment, gradient, and polynomial terms. We tried two classification algorithms, SVM and Gradient Boosting Trees. The performance of gradient boosting trees was better than SVM. The classifier achieved an accuracy of 0.80 on the training data set and 0.56 on the blind left-out set. There training dataset is still relatively small, and the imbalanced data may be the reason that the model performance dropped sharply in the test data set.
+The 9 well-log data set was used to develop a lithology facies classification model. There are 5 well-log measurements and 2 geologically derived features. We expanded the predictor feature numbers to 435, using augment, gradient, and polynomial terms. We tried two classification algorithms, SVM and Gradient Boosting Trees. The performance of gradient boosting trees was better than SVM. The classifier achieved an accuracy of 0.80 on the training data set and 0.56 on the blind left-out set. The training dataset is still relatively small, and the imbalanced data may be the reason that the model performance dropped sharply in the test data set.
